@@ -13,9 +13,10 @@
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
+        //"MyCustomKey": "This custom key is coming from lunchSettings.json"
       }
     },
-    "DotNetCoreFive_MVC_Project": {
+    "KestrelServer": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,
