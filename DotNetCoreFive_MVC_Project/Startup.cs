@@ -67,10 +67,10 @@ namespace DotNetCoreFive_MVC_Project
             });
             //app.UseMvcWithDefaultRoute();
             //app.UseWelcomePage();
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("iamtuseTheProgrammertech.com");
-            });
+            //app.Run(async (context) =>
+            //{
+            //    await context.Response.WriteAsync("iamtuseTheProgrammertech.com");
+            //});
         }
     }
 }
