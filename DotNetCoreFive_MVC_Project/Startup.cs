@@ -1,8 +1,13 @@
 using DotNetCoreFive_MVC_Project.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -13,16 +18,27 @@ namespace DotNetCoreFive_MVC_Project
     public class Startup
     {
         private IConfiguration _config;
-
         public Startup(IConfiguration configuration)
         {
             _config = configuration;
         }
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddSingleton(typeof(Customer));
             services
-                .AddMvc()
-                .AddXmlSerializerFormatters();
+                .AddMvc((options) => {
+                    var policy = new AuthorizationPolicyBuilder()
+                                        .RequireAuthenticatedUser()
+                                        .Build();
+                    options.Filters.Add(new AuthorizeFilter(policy));
+                }).AddXmlSerializerFormatters();
+            services.AddIdentity<AppUser, IdentityRole>((options) =>
+            {
+                options.Password.RequiredLength = 10;
+                options.Password.RequiredUniqueChars = 3;
+            }).AddEntityFrameworkStores<ApplicationDbContext>();
+            
+            //services.AddRazorPages();
             //Configure url
             services.Configure<RouteOptions>((_routeOptions) =>
             {
@@ -30,9 +46,12 @@ namespace DotNetCoreFive_MVC_Project
                 _routeOptions.LowercaseQueryStrings = true;
                 _routeOptions.LowercaseUrls = true;
             });
-                
-                
-            services.Add(new ServiceDescriptor(typeof(ICustomerRepository), typeof(CustomerImplementation), ServiceLifetime.Singleton));
+            services.AddDbContextPool<ApplicationDbContext>((_connenction) =>
+            {
+                _connenction.UseSqlServer(_config.GetConnectionString("DefaultConnection"));
+            });
+
+            services.Add(new ServiceDescriptor(typeof(ICustomerRepository), typeof(SQLCustomerRepository), ServiceLifetime.Scoped));
             //services.AddSingleton<ICustomerRepository, CustomerImplementation>();
             //services.AddMvcCore();
             //services
@@ -49,12 +68,23 @@ namespace DotNetCoreFive_MVC_Project
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseStatusCodePagesWithReExecute("/Error/{0}");
+            }
             //app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseRouting();
 
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseEndpoints((_config) =>
             {
+
+                //_config.MapRazorPages();
+                    
                 //Use for Attribute Routing  in ASPNET Core
                 //_config.MapControllers();
 
@@ -67,10 +97,14 @@ namespace DotNetCoreFive_MVC_Project
             });
             //app.UseMvcWithDefaultRoute();
             //app.UseWelcomePage();
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("iamtuseTheProgrammertech.com");
-            });
+
+            //app.Run(async (context) =>
+            //{
+            //    await context.Response.WriteAsync("<h4 style='color:red;font-family:verdana;'>Request processing pipeline give up processing your request developer iamtuse!</h5>");
+            //});
+
         }
+
+       
     }
 }

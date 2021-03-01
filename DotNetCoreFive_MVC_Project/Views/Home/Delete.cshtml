@@ -1,0 +1,38 @@
+﻿@model Customer
+@{ 
+    var photoPath = "~/images/" + (Model.PhotoPath ?? "iamtuseTheProgrammer_1.jpg");
+}
+    <div class="alert alert-danger alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h5 style="text-align:center;display:none;" class="aminateH5Elements">
+            Are you sure you want to delete customer @Model.Name?
+        </h5>
+    </div>
+
+    <div class="row justify-content-sm-center">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                </div>
+                <div class="card-body">
+                    <img src="@photoPath" asp-append-version="true" class="card-img-top" />
+                </div>
+                <div class="card-footer">
+                    <form method="post" asp-action="Delete" asp-controller="Home">
+                        <div class="row form-group">
+                            <div class="col-sm-12">
+                                <input type="submit" class="btn btn-danger btn-block" value="Delete" />
+                                <a asp-action="Index" asp-controller="Home" class="btn btn-secondary mt-2" style="width:500px;">
+                                    Back
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts{
+        <script src="~/js/site.js"></script>
+    }

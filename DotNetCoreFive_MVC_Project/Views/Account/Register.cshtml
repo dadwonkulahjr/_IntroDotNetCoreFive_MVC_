@@ -1,0 +1,44 @@
+﻿@model RegisterViewModel
+@{
+    ViewBag.Title = "Register New User";
+}
+<h1>Register New User</h1>
+<hr />
+<form method="post" asp-controller="Account" asp-action="Register">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-row">
+        <div class="col-6">
+            <label asp-for="Email" class="col-form-label"></label>
+            <input asp-for="Email" placeholder="Email..." class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="col-6">
+            <label asp-for="Password" class="col-form-label"></label>
+            <input asp-for="Password" placeholder="Password..." class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-6">
+            <label asp-for="Address" class="col-form-label"></label>
+            <select asp-for="Address" asp-items="Html.GetEnumSelectList<Address>()" class="custom-select">
+                <option value="">Select address</option>
+            </select>
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+        <div class="col-6">
+            <label asp-for="Gender" class="col-form-label"></label>
+            <select asp-for="Gender" asp-items="Html.GetEnumSelectList<Gender>()" class="custom-select">
+                <option value="">Select gender</option>
+            </select>
+            <span asp-validation-for="Gender" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-row">
+        <label asp-for="ConfirmPassword" class="col-form-label"></label>
+        <input asp-for="ConfirmPassword" placeholder="Confirm Password..." class="form-control" />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    </div>
+    <div class="form-row"> <input value="Register" class="btn btn-outline-primary mt-2" type="submit" style="width:auto;" /></div>
+
+</form>

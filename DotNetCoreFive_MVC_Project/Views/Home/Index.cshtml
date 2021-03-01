@@ -3,32 +3,58 @@
     ViewBag.Title = "List Of Customers";
 }
 
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Agent</th>
-        </tr>
-    </thead>
-    <tbody>
+@if (Model.Any())
+
+{
+
+    <div class="card-deck">
         @foreach (var customer in Model)
         {
-            <tr>
-                <td>
-                    @customer.ID
-                </td>
-                <td>
+            var photoPath = "~/images/" + (customer.PhotoPath ?? "Iam_tuseTheProgrammer_1.jpg");
+        <div class="card mt-3" style="min-width: 18rem; max-width: 30.5%;margin:5px;">
+            <div class="card-header">
+                <h3>
                     @customer.Name
-                </td>
-                <td>
-                    @customer.Email
-                </td>
-                <td>
-                    @customer.Agent
-                </td>
-            </tr>
+                </h3>
+            </div>
+            <img src="@photoPath" class="card-img-top imageThumnails" asp-append-version="true">
+            <div class="card-body">
+
+            </div>
+            <div class="card-footer text-center">
+                <a asp-controller="Home" asp-action="Details" asp-route-id="@customer.ID" class="btn btn-primary mt-2">View</a>
+                <a asp-controller="Home" asp-action="Edit" asp-route-id="@customer.ID" class="btn btn-primary mt-2">Edit</a>
+                <a asp-controller="Home" asp-action="Delete" asp-route-id="@customer.ID" class="btn btn-danger mt-2">Delete</a>
+            </div>
+        </div>
+
+
         }
-    </tbody>
-</table>
+
+    </div>
+}
+else
+{
+    <div class="card-deck">
+        <div class="card mt-2">
+            <div class="card-header">
+                <h5 class="aminateH5Elements">
+                    No record has been added yet!
+                </h5>
+            </div>
+            <div class="card-body">
+                <h4 class="card-title">
+                    Click the button below to create new record.
+                </h4>
+            </div>
+            <div class="card-footer text-center">
+                <a asp-controller="Home" asp-action="Create" class="btn btn-primary" style="width:1000px;">
+                    Create new record
+                </a>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts{
+    <script src="~/js/site.js"></script>
+}

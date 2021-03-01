@@ -32,8 +32,22 @@ using DotNetCoreFive_MVC_Project.ViewModels;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "C:\Users\Dad S. Wonkulah Jr\source\repos\DotNetCoreFive_MVC_Project_UI\DotNetCoreFive_MVC_Project\Views\_ViewImports.cshtml"
+using DotNetCoreFive_MVC_Project.HelperResource;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "C:\Users\Dad S. Wonkulah Jr\source\repos\DotNetCoreFive_MVC_Project_UI\DotNetCoreFive_MVC_Project\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Identity;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7091c65830b0329e613be026ede8a57552863778", @"/Views/_ViewStart.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"52f5763a50c9feacff528b2d0c708c0e84c726b3", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"ddfe7a77a81aa02621f05acb14006944603b6a82", @"/Views/_ViewImports.cshtml")]
     public class Views__ViewStart : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

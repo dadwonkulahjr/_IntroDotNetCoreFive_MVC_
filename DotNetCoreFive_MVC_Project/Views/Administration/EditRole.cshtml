@@ -1,0 +1,59 @@
+﻿@model EditRoleViewModel
+@{ 
+    ViewBag.Title = "Edit Role";
+}
+
+<h1>
+    Edit Role
+</h1>
+<hr />
+<form asp-controller="Administration" asp-action="EditRole" method="post">
+    <div class="form-row">
+        <label asp-for="RoleId" class="col-form-label col-sm-2"></label>
+        <div class="col-sm-10">
+            <input asp-for="RoleId" disabled class="form-control" />
+        </div>
+    </div>
+    <div class="form-row mt-2">
+        <label asp-for="RoleName" class="col-form-label col-sm-2"></label>
+        <div class="col-sm-10">
+            <input asp-for="RoleName" class="form-control" />
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-sm-10 mt-2">
+            <input type="submit" value="Update" class="btn btn-outline-primary" style="width:auto;" />
+            <a asp-action="ListRoles" asp-controller="Administration" class="btn btn-outline-secondary"
+               style="width:auto;">
+                Back to List
+            </a>
+        </div>
+    </div>
+
+    <div class="card mt-3 mb-3">
+        <div class="card-header">
+            <h1>Users in this role</h1>
+        </div>
+        <div class="card-body">
+            @if (Model.Users.Any())
+            {
+                foreach (var user in Model.Users)
+                {
+                    <h5 class="card-title">
+                            @user
+                    </h5>
+                }
+            }
+            else
+            {
+                <h5 class="card-text">Click the button below to add new users.</h5>
+            }
+        </div>
+        <div class="card-footer">
+            <a class="btn btn-primary text-white" style="width:auto;">Add users</a>
+            <a class="btn btn-primary text-white" style="width:auto;">Remove users</a>
+        </div>
+    </div>
+
+
+</form>

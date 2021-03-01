@@ -1,24 +1,33 @@
 ﻿@model HomeDetailsViewModel
 
 @{
-    ViewBag.Title = "Customer Details";
+   
+    var photoPath = "~/images/" + (Model.Customer.PhotoPath ?? "iamtuseTheProgrammer_1.jpg");
 }
 
-<h3>
-    @Model.PageTitle
-</h3>
-<hr />
-<div>
-    Name : @Model.Customer.Name
-</div>
-<div>
-    Email : @Model.Customer.Email
-</div>
-<div>
-    Agent Name : @Model.Customer.Agent
+<div class="row justify-content-center mt-3">
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header">
+                <h3>
+                    @Model.Customer.Name
+                </h3>
+            </div>
+            <img src="@photoPath" class="card-img-top imageThumnails" asp-append-version="true" />
+            <div class="card-body text-center">
+                <h4>Email: @Model.Customer.Email</h4>
+                <h4>Agent: @Model.Customer.Agent</h4>
+            </div>
+            <div class="card-footer text-center">
+                <a asp-controller="home" asp-action="index" class="btn btn-primary mt-2">Back</a>
+                <a asp-controller="Home" asp-action="Edit" asp-route-id="@Model.Customer.ID" class="btn btn-primary mt-2">Edit</a>
+                <a asp-controller="Home" asp-action="Delete" asp-route-id="@Model.Customer.ID" class="btn btn-danger mt-2">Delete</a>
+            </div>
+        </div>
+
+
+
+    </div>
 </div>
 
 
-@section Scripts{
-    <script src="~/js/site.js"></script>
-}

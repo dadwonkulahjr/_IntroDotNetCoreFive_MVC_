@@ -6,5 +6,8 @@ namespace DotNetCoreFive_MVC_Project.Models
     {
         Customer GetCustomer(int id);
         IEnumerable<Customer> GetListOfCustomers();
+        Customer Create(Customer customer);
+        Customer Update(Customer customer);
+        Customer Delete(int id);
     }
 }
