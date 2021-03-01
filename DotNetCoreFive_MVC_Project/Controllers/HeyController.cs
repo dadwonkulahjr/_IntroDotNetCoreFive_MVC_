@@ -7,9 +7,11 @@ namespace DotNetCoreFive_MVC_Project.Controllers
     //localhost:http://localhost:58255/hey/index
     public class HeyController : Controller
     {
-        public async Task Index()
+        public ViewResult Greetings()
         {
-            await Response.HttpContext.Response.WriteAsync("<h1 style='text-align:center;color:red;font-Family:verdana;'>Hi, welcome the Hey Controller!</h1>");
+            ViewBag.Data = "Hello World";
+            ViewBag.Say = "I love computer programming!";
+            return View("SayHi");
 
         }
     }

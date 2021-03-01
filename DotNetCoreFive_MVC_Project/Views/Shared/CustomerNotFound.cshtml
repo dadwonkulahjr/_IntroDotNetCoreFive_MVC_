@@ -1,0 +1,14 @@
+﻿@model int
+@{ 
+    ViewBag.Title = "Custome Not Found";
+}
+<div class="alert alert-danger">
+    <h4>Error 404:</h4>
+    <hr />
+    <h5>
+        The customer with Id = @Model cannot be found at this moment.
+    </h5>
+</div>
+<a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary" style="width:auto">
+    Click the link to view the list of customers
+</a>
